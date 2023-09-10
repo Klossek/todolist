@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tasks/{id}', [TaskController::class, 'show']);
+Route::get('/tasks/{task}', [TaskController::class, 'show']);
 Route::get('/tasks', [TaskController::class, 'showAll']);
 Route::post('/tasks/create', [TaskController::class, 'create']);
-Route::delete('/tasks/delete/{id}', [TaskController::class, 'delete']);
-
+Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
+Route::post('/tasks/set-complete/{task}', [TaskController::class, 'setComplete']);
 
 
 

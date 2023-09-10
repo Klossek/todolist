@@ -5,63 +5,53 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Exception;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    public function setComplete(Task $task)
     {
-        //
+
+        $task->completed = !$task->completed;
+        $task->update();
+        return response($task);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showAll()
     {
+        return response(Task::all());
+    }
+
+
+    public function create(StoreTaskRequest $request)
+    {
+
+
         $task = new Task();
+        $task->name = $request->name;
+        $task->description = $request->description;
         $task->save();
+
+        return response($task);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTaskRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Task $task)
     {
-        //
+
+
+        return response()->json([
+            'task' =>  $task->name
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTaskRequest $request, Task $task)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Task $task)
+    public function delete(Task $task)
     {
-        //
+        $task->delete();
     }
 }
