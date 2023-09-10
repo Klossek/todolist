@@ -1,0 +1,63 @@
+<p>register-form works!</p>
+<form #registerForm="ngForm" class="flex flex-col gap-2 m-2">
+  <div class="form-group">
+    <label for="employeeName"> Name </label>
+    <input
+      minlength="3"
+      required
+      [(ngModel)]="name"
+      name="name"
+      type="text"
+      id="employeeName"
+      class="form-control"
+      (change)="log(name)"
+      #ctrl="ngModel"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="ctrl.errors && ctrl.touched && !ctrl.valid"
+    >
+      <div *ngIf="ctrl.errors['required']">Please select a name</div>
+      <div *ngIf="ctrl.errors['minlength']">Name should be minimum 3 chars</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="employeeEmail"> Email </label>
+    <input
+      [(ngModel)]="email"
+      name="email"
+      type="text"
+      id="employeeEmail"
+      class="form-control"
+      (change)="log(email)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="password"> Password </label>
+    <input
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      id="password"
+      class="form-control"
+      (change)="log(password)"
+    />
+  </div>
+  <button
+    [disabled]="registerForm.invalid"
+    (click)="register()"
+    class="btn btn-primary"
+  >
+    Register
+  </button>
+</form>
+
+<div class="flex flex-col gap-3">
+  <button (click)="hello()" class="btn btn-primary">hello</button>
+  <button (click)="logout()" class="btn btn-primary">logout</button>
+
+  <button (click)="getUser()" class="btn btn-primary">getUser</button>
+  <button (click)="test()" class="btn btn-primary">test</button>
+  <button (click)="testPost()" class="btn btn-primary">testPost</button>
+</div>

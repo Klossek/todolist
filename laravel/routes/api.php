@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -24,6 +25,9 @@ Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
 Route::post('/tasks/set-complete/{task}', [TaskController::class, 'setComplete']);
 
 
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+
 
 
 
@@ -44,9 +48,12 @@ Route::post('/logout', function (Request $request) {
 
 
 Route::post('/greeting', function (Request $request) {
-
     $user = $request->user();
-    return  var_dump($user);
+    return response($user);
+});
+
+Route::get('/greeting', function (Request $request) {
+    $user =  $request->user();
 
     return response()->json([
         'user' => $user,

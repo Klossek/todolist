@@ -1,0 +1,41 @@
+<h1>Create new task</h1>
+<form #taskForm="ngForm" class="task-form flex flex-col">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      required
+      minlength="3"
+      [(ngModel)]="name"
+      name="name"
+      #ctrl="ngModel"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="ctrl.errors && ctrl.touched && !ctrl.valid"
+    >
+      <div *ngIf="ctrl.errors['required']">Please select a name</div>
+      <div *ngIf="ctrl.errors['minlength']">Name should be minimum 3 chars</div>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="describe the task in detail"
+      [(ngModel)]="description"
+      name="description"
+    ></textarea>
+  </mat-form-field>
+
+  <button
+    color="primary"
+    mat-raised-button
+    [disabled]="taskForm.invalid"
+    (click)="create()"
+    class="btn btn-primary"
+  >
+    Create task
+  </button>
+</form>

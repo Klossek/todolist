@@ -1,0 +1,17 @@
+<div class="flex" *ngIf="task">
+  <mat-checkbox
+    [checked]="task.completed"
+    color="primary"
+    (click)="toggleCompleted(task)"
+  ></mat-checkbox>
+  <div class="flex flex-col items-start justify-center">
+    <div class="flex justify-center items-center">
+      {{ task.name }}
+
+      <mat-icon class="cursor-pointer hover:text-red-600" (click)="delete(task)"
+        >delete</mat-icon
+      >
+    </div>
+    <p *ngIf="task.description" class="text-xs">{{ task.description }}</p>
+  </div>
+</div>
