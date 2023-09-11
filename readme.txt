@@ -9,10 +9,9 @@ composer install
 
 create database + database user 
 
+php artisan migrate #create tables
 
-serve:
-
- php artisan serve
+php artisan serve
     
 
 Frontend:

@@ -19,22 +19,12 @@ export class LoginFormComponent {
     console.log(x);
   };
 
-  public createToken = () => {
+  public login = () => {
     const userObs = this.userService.createToken().subscribe(() => {
-      const userObs = this.userService.login(
-        'golo.klossek@gmail.com',
-        '12345678',
-      );
+      const userObs = this.userService.login(this.email, this.password);
       userObs.subscribe((user: User) => {
         console.log(user);
       });
-    });
-  };
-
-  public login = () => {
-    const userObs = this.userService.login(this.email, this.password);
-    userObs.subscribe((user: User) => {
-      console.log(user);
     });
   };
 }

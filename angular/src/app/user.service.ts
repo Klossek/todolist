@@ -31,8 +31,6 @@ export class UserService {
     return '';
   }
 
-
-
   httpOptions = {
     headers: this.headers,
     withCredentials: true,
@@ -79,9 +77,9 @@ export class UserService {
   login(email: String, password: String): Observable<User> {
     return this.http
       .post<User>(
-        this.authUrl + '/api/login',
+        this.authUrl + '/login',
         { email, password },
-        this.httpOptions,
+        this.httpOptions
       )
       .pipe(catchError(this.handleError<User>('login')));
   }
@@ -91,7 +89,7 @@ export class UserService {
       .post<User>(
         this.authUrl + '/register',
         { name, email, password, password_confirmation: password },
-        this.httpOptions,
+        this.httpOptions
       )
       .pipe(catchError(this.handleError<User>('register')));
   }

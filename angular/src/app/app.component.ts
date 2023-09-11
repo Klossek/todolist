@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular';
-
-  /*
-  <login-form></login-form>
-  <register-form></register-form>
-*/
 }
