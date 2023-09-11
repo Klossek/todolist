@@ -35,7 +35,6 @@ export class ToDoListComponent {
     const taksksObs = this.taskService.getTasks();
     taksksObs.subscribe((tasks: Task[]) => {
       this.tasks = tasks;
-      console.log(tasks);
     });
   }
 }

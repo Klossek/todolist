@@ -21,7 +21,10 @@ export class LoginFormComponent {
 
   public createToken = () => {
     const userObs = this.userService.createToken().subscribe(() => {
-      const userObs = this.userService.login('j@w.de', '12345678');
+      const userObs = this.userService.login(
+        'golo.klossek@gmail.com',
+        '12345678',
+      );
       userObs.subscribe((user: User) => {
         console.log(user);
       });

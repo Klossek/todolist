@@ -14,7 +14,6 @@ export class UserService {
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    Accept: 'application/json',
   });
 
   private getCookie(cname: string) {
@@ -32,8 +31,11 @@ export class UserService {
     return '';
   }
 
+
+
   httpOptions = {
     headers: this.headers,
+    withCredentials: true,
   };
 
   constructor(private http: HttpClient) {}
@@ -45,9 +47,8 @@ export class UserService {
   }
 
   postHello(): Observable<User> {
-    console.log('TT T');
     return this.http
-      .post<User>(this.authUrl + '/api/greeting', this.httpOptions)
+      .post<User>(this.authUrl + '/api/greeting', {}, this.httpOptions)
       .pipe(catchError(this.handleError<User>('get')));
   }
 

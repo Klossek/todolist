@@ -23,6 +23,8 @@ export class TaskFormComponent {
     const obs = this.taskService.create(this.name, this.description);
     obs.subscribe((task: Task) => {
       this.createTaskEvent.emit(task);
+      this.name = '';
+      this.description = '';
     });
   };
 }

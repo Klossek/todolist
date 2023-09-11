@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/*
+|--------------------------------------------------------------------------
+| Tasks Routes
+|--------------------------------------------------------------------------
+|
+|
+*/
+
 Route::get('/tasks/{task}', [TaskController::class, 'show']);
 Route::get('/tasks', [TaskController::class, 'showAll']);
 Route::post('/tasks/create', [TaskController::class, 'create']);
@@ -25,33 +34,27 @@ Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
 Route::post('/tasks/set-complete/{task}', [TaskController::class, 'setComplete']);
 
 
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Login Routes
+|--------------------------------------------------------------------------
+|
+|
+*/
 Route::post('/login', [LoginController::class, 'authenticate']);
-
-
-
-
-
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::middleware(['auth:sanctum'])->post('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::post('/logout', function (Request $request) {
-    Auth::logout();
-
-    $request->session()->invalidate();
-
-    //$request->session()->regenerateToken();
-    return response('logged out', 200)
-        ->header('Content-Type', 'text/plain');
-});
-
-
 Route::post('/greeting', function (Request $request) {
     $user = $request->user();
-    return response($user);
+    return response()->json(["das" => $user]);
 });
-
 Route::get('/greeting', function (Request $request) {
     $user =  $request->user();
 
