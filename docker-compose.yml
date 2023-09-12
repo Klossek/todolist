@@ -19,11 +19,14 @@ services:
       context: ./angular
       dockerfile: Dockerfile
     image: angular
+    volumes:
+      - ./angular:/usr/src/app
+    command: ng serve --port=3000 --host=0.0.0.0
 
     ports:
       - 3000:3000
 
-  app:
+  api:
     build:
       args:
         WWWGROUP: 1000
@@ -34,7 +37,7 @@ services:
 
     image: todolist
     tty: true
-    container_name: todolist-app
+    container_name: todolist-api
 
     working_dir: /var/www/html
     volumes:

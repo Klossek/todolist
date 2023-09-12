@@ -2,9 +2,6 @@
 
 Docker:
 
-cd laravel
-copy .env.example --> .env 
-
 docker-compose build
 docker-compose up
 
