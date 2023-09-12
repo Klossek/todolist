@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=myPassword
+      - POSTGRES_DB=mydb
+    ports:
+      - "5433:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./docker-compose/db/dump.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  angular:
+    build:
+      context: ./angular
+      dockerfile: Dockerfile
+    image: angular
+
+    ports:
+      - 3000:3000
+
+  app:
+    build:
+      args:
+        WWWGROUP: 1000
+        user: sammy
+        uid: 1000
+      context: ./laravel
+      dockerfile: Dockerfile
+
+    image: todolist
+    tty: true
+    container_name: todolist-app
+
+    working_dir: /var/www/html
+    volumes:
+      - ./laravel:/var/www/html
+
+    ports:
+      - "8000:8000"
+volumes:
+  db:
+    driver: local
