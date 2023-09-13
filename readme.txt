@@ -1,12 +1,14 @@
 
 
-Docker:
+Install with Docker:
 
 docker-compose build
+cd laravel 
+composer install
 docker-compose up
 
 
-Local:
+Install locally:
 
 
 Backend:
